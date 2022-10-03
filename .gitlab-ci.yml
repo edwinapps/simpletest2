@@ -1,0 +1,18 @@
+image: grihabor/pytest:latest
+
+test_1:
+  stage: test
+  tags:
+     - bash
+
+  script:
+    - pytest ./source/test_1.py
+    - pytest ./source/test_1.py -v --junitxml="./test-results/anyname.xml"
+  artifacts:
+    when: always
+    paths:
+        - test-results/*.xml
+    reports:
+      junit:
+        - test-results/*.xml
+
